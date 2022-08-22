@@ -1,0 +1,30 @@
+<table id="accountingList">
+    <tr>
+        <th>
+            <span>amount</span>
+        </th>
+        <th>
+            <span>date</span>
+        </th>
+        <th>
+            <span>remark</span>
+        </th>
+    </tr>
+    
+    <tbody>
+    @foreach (var item in Model.AccountingModels)
+    {
+        <tr>
+            <td>
+                <span> @item.amount</span>
+            </td>
+            <td>
+                <span> @item.date</span>
+            </td>
+            <td>
+                <span> @item.remark</span>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

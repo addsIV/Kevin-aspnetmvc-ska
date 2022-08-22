@@ -1,0 +1,35 @@
+ @model AccountingModel
+ @using (Html.BeginForm("SaveToFakeDb", "Home", FormMethod.Post))
+ {
+      <table>
+             <tr>
+                 <td>
+                     <span>Account</span>
+                 </td>
+                 <td>
+                     <input asp-for="amount"> 
+                 </td>
+             </tr>
+             <tr>
+                 <td>
+                     <span>Date</span>
+                 </td>
+                 <td>
+                     <input asp-for="date"> 
+                 </td>
+             </tr>
+             <tr>
+                 <td>
+                     <span>Remark</span>
+                 </td>
+                 <td>
+                     <input asp-for="remark">
+                 </td>
+             </tr>
+             <tr>
+                 <td>
+                     <button type="submit">submit</button>
+                 </td>
+             </tr>
+         </table> 
+ }

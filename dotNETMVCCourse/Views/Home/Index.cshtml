@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using dotNetMvcCourse.Controllers
+@model dotNetMvcCourse.Models.AccountingListModel
+
+<div class="text-center accountingSubmitForm">
+    @await Html.PartialAsync("_AccountingSubmitFormPartialView",new AccountingModel())
+</div>
+
+<div class="text-center accountingList">
+   @await Html.PartialAsync("_AccountingListPartialView")
+</div>
