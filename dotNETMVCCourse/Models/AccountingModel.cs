@@ -1,8 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace dotNetMvcCourse.Models;
 
 public class AccountingModel
 {
-    public string amount { get; set; }
-    public string date { get; set; }
+    [Required]
+    public int amount { get; set; }
+    [Required]
+    public DateTime date { get; set; }
+    [MaxLength(100)]
     public string remark { get; set; }
 }

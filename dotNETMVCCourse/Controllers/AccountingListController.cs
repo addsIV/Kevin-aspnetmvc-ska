@@ -16,7 +16,7 @@ public class AccountingListController : Controller
     public AccountingListModel GetAccountingList()
     {
         var accountingModels = new List<AccountingModel>();
-        return new AccountingListModel(accountingModels);
+        return new AccountingListModel();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

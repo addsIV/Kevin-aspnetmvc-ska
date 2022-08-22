@@ -15,12 +15,12 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var accountingListModel = new AccountingListModel(new List<AccountingModel>()
+        FakeDb.AccountingList = new List<AccountingModel>();
+        var accountingListModel = new AccountingListModel()
         {
-            new AccountingModel(){amount = "123", date = "2022/08/22",remark = "breakfast"},
-            new AccountingModel(){amount = "123", date = "2022/08/22",remark = "breakfast"},
-            new AccountingModel(){amount = "123", date = "2022/08/22",remark = "breakfast"},
-        });
+            AccountingModels = new List<AccountingModel>(),
+            AccountingModel = new AccountingModel()
+        };
         
         return View(accountingListModel);
     }
@@ -28,8 +28,20 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult SaveToFakeDb(AccountingModel accountingModel)
     {
-        FakeDb.AccountingList?.Add(accountingModel);
-        var accountingListModel = new AccountingListModel(FakeDb.AccountingList);
+        if (accountingModel.amount <= 0)
+        {
+            ModelState.AddModelError("amount", "amount can not less then 0.");
+            return View("Index", new AccountingListModel()
+            {
+                AccountingModels = FakeDb.AccountingList
+            });
+        }
+      
+        FakeDb.AccountingList.Add(accountingModel);
+        var accountingListModel = new AccountingListModel
+        {
+            AccountingModels = FakeDb.AccountingList
+        };
         return View("Index", accountingListModel);
     }
 

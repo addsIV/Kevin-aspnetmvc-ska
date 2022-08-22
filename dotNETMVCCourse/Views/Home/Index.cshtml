@@ -5,7 +5,7 @@
 @model dotNetMvcCourse.Models.AccountingListModel
 
 <div class="text-center accountingSubmitForm">
-    @await Html.PartialAsync("_AccountingSubmitFormPartialView")
+    @await Html.PartialAsync("_AccountingSubmitFormPartialView", Model.AccountingModel)
 </div>
 
 <div class="text-center accountingList">
