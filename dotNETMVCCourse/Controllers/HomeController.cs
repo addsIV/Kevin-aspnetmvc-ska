@@ -1,27 +1,30 @@
 ﻿using System.Diagnostics;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using dotNetMvcCourse.Models;
+using dotNetMvcCourse.Proxies;
 
 namespace dotNetMvcCourse.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly IFakeDbProxy _fakeDbProxy;
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IFakeDbProxy fakeDbProxy)
     {
         _logger = logger;
+        _fakeDbProxy = fakeDbProxy;
     }
 
     public IActionResult Index()
     {
-        FakeDb.AccountingList = new List<AccountingModel>();
         var accountingListModel = new AccountingListModel()
         {
             AccountingModels = new List<AccountingModel>(),
             AccountingModel = new AccountingModel()
         };
-        
+
         return View(accountingListModel);
     }
 
@@ -31,25 +34,19 @@ public class HomeController : Controller
         if (accountingModel.amount <= 0)
         {
             ModelState.AddModelError("amount", "amount can not less then 0.");
-            return View("Index", new AccountingListModel()
-            {
-                AccountingModels = FakeDb.AccountingList
-            });
         }
-      
-        FakeDb.AccountingList.Add(accountingModel);
-        var accountingListModel = new AccountingListModel
+        else
         {
-            AccountingModels = FakeDb.AccountingList
-        };
-        return View("Index", accountingListModel);
+            _fakeDbProxy.InsertToFake(accountingModel);
+        }
+        
+        return View("Index",
+            new AccountingListModel
+            {
+                AccountingModels = _fakeDbProxy.GetAccountingModels()
+            });
     }
 
-    [HttpGet("Hello")]
-    public IActionResult Privacy()
-    {
-        return View();
-    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

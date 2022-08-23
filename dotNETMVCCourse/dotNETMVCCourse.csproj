@@ -8,4 +8,8 @@
         <RootNamespace>dotNetMvcCourse</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Service" />
+    </ItemGroup>
+
 </Project>

@@ -1,5 +1,9 @@
+using dotNetMvcCourse.Models;
+using dotNetMvcCourse.Proxies;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton<IFakeDbProxy, FakeDbProxy>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
