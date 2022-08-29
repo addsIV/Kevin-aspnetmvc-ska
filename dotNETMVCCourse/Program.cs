@@ -3,7 +3,7 @@ using dotNetMvcCourse.Proxies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<IFakeDbProxy, FakeDbProxy>();
+builder.Services.AddSingleton<IDbProxy, DbProxy>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

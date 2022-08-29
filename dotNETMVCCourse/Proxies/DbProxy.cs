@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dotNetMvcCourse.Proxies;
 
-public class FakeDbProxy : IFakeDbProxy
+public class DbProxy : IDbProxy
 {
     public IEnumerable<AccountingModel> GetAccountingModels()
     {

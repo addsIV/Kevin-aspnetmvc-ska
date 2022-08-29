@@ -9,18 +9,18 @@ namespace dotNetMvcCourse.Controllers;
 [Route("api")]
 public class FakeDbApiController
 {
-    private readonly IFakeDbProxy _fakeDbProxy;
+    private readonly IDbProxy _dbProxy;
 
-    public FakeDbApiController(IFakeDbProxy fakeDbProxy)
+    public FakeDbApiController(IDbProxy dbProxy)
     {
-        _fakeDbProxy = fakeDbProxy;
+        _dbProxy = dbProxy;
     }
 
     [HttpGet]
     [Route("records")]
     public string GetAccountingList()
     {
-        var response = JsonSerializer.Serialize(_fakeDbProxy.GetAccountingModels());
+        var response = JsonSerializer.Serialize(_dbProxy.GetAccountingModels());
         return response;
     }
 }

@@ -8,13 +8,13 @@ namespace dotNetMvcCourse.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly IFakeDbProxy _fakeDbProxy;
+    private readonly IDbProxy _dbProxy;
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger, IFakeDbProxy fakeDbProxy)
+    public HomeController(ILogger<HomeController> logger, IDbProxy dbProxy)
     {
         _logger = logger;
-        _fakeDbProxy = fakeDbProxy;
+        _dbProxy = dbProxy;
     }
 
     public IActionResult Index()
@@ -35,15 +35,16 @@ public class HomeController : Controller
         {
             ModelState.AddModelError("amount", "amount can not less then 0.");
         }
-        else
+        
+        if(ModelState.IsValid)
         {
-            _fakeDbProxy.InsertToFake(accountingModel);
+            _dbProxy.InsertToFake(accountingModel);
         }
         
         return View("Index",
             new AccountingListModel
             {
-                AccountingModels = _fakeDbProxy.GetAccountingModels()
+                AccountingModels = _dbProxy.GetAccountingModels()
             });
     }
 
