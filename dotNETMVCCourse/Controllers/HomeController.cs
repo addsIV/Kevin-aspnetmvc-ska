@@ -31,11 +31,6 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult SaveToFakeDb(AccountingModel accountingModel)
     {
-        if (accountingModel.amount <= 0)
-        {
-            ModelState.AddModelError("amount", "amount can not less then 0.");
-        }
-        
         if(ModelState.IsValid)
         {
             _dbProxy.InsertToFake(accountingModel);
